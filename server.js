@@ -8,20 +8,23 @@ import cors from "cors";
 import connectDb from "./config/db.js";
 import errorHandeler from "./utils/errorHandler.js";
 import auth from "./routes/auth.js";
+import transactions from "./routes/transaction.js";
+import account from "./routes/account.js";
 // import mongoSanitize from "express-mongo-sanitize"
 const app = express();
 dotenv.config({ path: "./.env" });
 connectDb();
+// mounting cors
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-  cors({
-    credentials: true,
-    origin: true,
-  })
-);
 
 app.use(express.static("public"));
 
@@ -31,9 +34,9 @@ app.get("/", (req, res, next) => {
 
 app.use("/api/v1/auth", auth);
 
-// app.use("/api/v1/account", account);
+app.use("/api/v1/account", account);
 
-// app.use("/api/v1/transaction", transaction);
+app.use("/api/v1/transaction", transactions);
 
 // mounting error handeler
 app.use(errorHandeler);

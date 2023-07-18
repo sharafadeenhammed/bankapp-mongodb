@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const TransactionSchema = mongoose.Schema(
   {
-    id: { type: mongoose.Schema.ObjectId, required: true },
+    id: { type: mongoose.Schema.ObjectId },
     user_id: { type: mongoose.Schema.ObjectId, required: true },
     account_id: { type: mongoose.Schema.ObjectId, required: true },
     sender_name: {
@@ -38,6 +38,10 @@ const TransactionSchema = mongoose.Schema(
       require: true,
     },
     amount: { type: Number, require: true },
+    created_at: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );

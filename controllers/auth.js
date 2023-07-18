@@ -18,7 +18,7 @@ export const createUser = asyncHandeler(async (req, res, next) => {
     email,
     address,
     age,
-    phone_number,
+    phone,
     account_type,
     balance,
   } = user;
@@ -30,7 +30,7 @@ export const createUser = asyncHandeler(async (req, res, next) => {
   //   !email ||
   //   !address ||
   //   !age ||
-  //   !phone_number
+  //   !phone
   // ) {
   //   return next(
   //     new ErrorResponse(
@@ -95,7 +95,7 @@ export const login = asyncHandeler(async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email }).select("+password");
-  if (user.length === 0) {
+  if (!user) {
     return next(new ErrorResponse("invalid login credentials", 400));
   }
   // verify password
@@ -138,7 +138,8 @@ export const login = asyncHandeler(async (req, res, next) => {
 // @desc  get logged user
 // @access PRIVATE
 export const getUser = asyncHandeler(async (req, res, next) => {
-  const user = await User.findOne({ email: req.user.email });
+  const user = await User.findById(req.user.id);
+
   if (!user) {
     return next(new ErrorResponse("not authorized to access this route", 401));
   }

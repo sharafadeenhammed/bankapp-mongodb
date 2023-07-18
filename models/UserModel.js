@@ -7,15 +7,18 @@ const UserSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
     },
     first_name: {
+      trim: true,
       type: String,
       require: [true, "please enter your first name"],
     },
     last_name: {
+      trim: true,
       type: String,
       require: [true, "please enter your last name"],
     },
     email: {
       type: String,
+      trim: true,
       unique: true,
       require: [true, "please enter your email"],
       match: [
@@ -33,13 +36,15 @@ const UserSchema = mongoose.Schema(
       type: Number,
       require: [true, "please enter your age"],
     },
-    phone_number: {
+    phone: {
       type: String,
+      trim: true,
       unique: true,
       require: [true, "please enter your phone number"],
     },
     address: {
       type: String,
+      trim: true,
       require: [true, "please enter your address"],
     },
     img_url: String,
