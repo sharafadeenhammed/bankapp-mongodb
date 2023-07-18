@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static("public"));
 
 app.get("/", (req, res, next) => {
-  res.redirect("https://documenter.getpostman.com/view/20324776/2s93RNyEuB");
+  res.redirect("https://documenter.getpostman.com/view/20324776/2s946iaqNP");
 });
 
 app.use("/api/v1/auth", auth);
