@@ -1,6 +1,5 @@
 let resData = {};
 async function errorHandler(data, req, res, next) {
-  console.log(data);
   // console.log(data.message);
   // console.log(data.code, data.keyValue);
 
