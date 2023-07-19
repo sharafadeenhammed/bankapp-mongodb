@@ -78,7 +78,7 @@ export const createUser = asyncHandeler(async (req, res, next) => {
     .cookie("token", `Bearer ${token}`, {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 2,
     })
     .json({
@@ -124,7 +124,7 @@ export const login = asyncHandeler(async (req, res, next) => {
     .cookie("token", `Bearer ${token}`, {
       httpOnly: true,
       secure: true,
-      // sameSite: "strict",
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 2,
     })
     .json({

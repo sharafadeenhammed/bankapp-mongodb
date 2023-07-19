@@ -38,7 +38,7 @@ export const protect = asyncHandeler(async (req, res, next) => {
   res.cookie("token", `Bearer ${token}`, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 1000 * 60 * 60 * 2,
   });
   next();
