@@ -165,3 +165,5 @@ export const logoutUser = asyncHandeler(async (req, res, next) => {
       token: "",
     });
 });
+
+// todo user profile update and photo upload
