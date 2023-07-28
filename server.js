@@ -53,7 +53,7 @@ app.get("/message", async (req, res, next) => {
     );
 
     if (response.status < 200 && response.status > 300) throw res.data;
-    console.log(response);
+    console.log(response.data);
     res.status(200).json({ status: "okay" });
   } catch (error) {
     console.log(error);
