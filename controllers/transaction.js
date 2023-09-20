@@ -42,7 +42,9 @@ export const makeTransaction = asyncHandeler(async (req, res, next) => {
   }
   // check if beneficiary account is different from the sender account
   if (beneficiaryAccount.account_number === senderAccount.account_number) {
-    return next(new ErrorResponse(`same account to transaction error`, 400));
+    return next(
+      new ErrorResponse(`same account to transaction transaction error`, 400)
+    );
   }
 
   //generate beneficiary transaction receipt
