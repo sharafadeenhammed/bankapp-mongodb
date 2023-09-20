@@ -41,8 +41,7 @@ export const makeTransaction = asyncHandeler(async (req, res, next) => {
     return next(new ErrorResponse("beneficiary account not found", 404));
   }
   // check if beneficiary account is different from the sender account
-  console.log(beneficiaryAccount, senderAccount);
-  if (beneficiaryAccount.account_number === senderAccount.account_number) {
+  if (beneficiaryAccount.account_number === senderAccount.account) {
     return next(new ErrorResponse(`same account to transaction error`, 400));
   }
 
