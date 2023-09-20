@@ -15,6 +15,12 @@ export const makeTransaction = asyncHandeler(async (req, res, next) => {
     return next(new ErrorResponse("sender account not found", 404));
   }
 
+  if (senderAccount.id == req.params.id) {
+    return next(
+      new ErrorResponse("same account to account transaction error", 404)
+    );
+  }
+
   // check if account belongs to the logged in user
   if (String(req.user.id) !== String(senderAccount.user_id)) {
     return next(new ErrorResponse("unauthorized operation on account", 401));

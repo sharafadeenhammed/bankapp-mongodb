@@ -44,7 +44,7 @@ export const createUser = asyncHandeler(async (req, res, next) => {
   if (!user) {
     new ErrorResponse(
       "cannot create your account at this time try again later",
-      400
+      500
     );
   }
   // create user account
