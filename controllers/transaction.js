@@ -15,12 +15,6 @@ export const makeTransaction = asyncHandeler(async (req, res, next) => {
     return next(new ErrorResponse("sender account not found", 404));
   }
 
-  if (senderAccount.id == req.params.id) {
-    return next(
-      new ErrorResponse("same account to account transaction error", 404)
-    );
-  }
-
   // check if account belongs to the logged in user
   if (String(req.user.id) !== String(senderAccount.user_id)) {
     return next(new ErrorResponse("unauthorized operation on account", 401));
@@ -32,7 +26,7 @@ export const makeTransaction = asyncHandeler(async (req, res, next) => {
   }
 
   // validate request body fields
-  if (!amount || !beneficiaryAccount || amount < 0) {
+  if (!beneficiaryAccount || amount <= 0) {
     return next(
       new ErrorResponse("include a beneficiary account and amount", 400)
     );
@@ -47,7 +41,8 @@ export const makeTransaction = asyncHandeler(async (req, res, next) => {
     return next(new ErrorResponse("beneficiary account not found", 404));
   }
   // check if beneficiary account is different from the sender account
-  if (beneficiaryAccount.id === senderAccount.id) {
+  console.log(beneficiaryAccount, senderAccount);
+  if (beneficiaryAccount.account_number === senderAccount.account_number) {
     return next(new ErrorResponse(`same account to transaction error`, 400));
   }
 
