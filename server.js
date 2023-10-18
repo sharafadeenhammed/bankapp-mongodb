@@ -64,6 +64,8 @@ app.use("/api/v1/auth", auth);
 
 app.use("/api/v1/account", account);
 
+app.use("/api/v1/user", account);
+
 app.use("/api/v1/transaction", transactions);
 
 // mounting error handeler
