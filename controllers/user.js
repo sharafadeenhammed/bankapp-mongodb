@@ -38,7 +38,7 @@ export const photoUpload = asyncHandeler(async (req, res, next) => {
     path.join(__dirname, "..", "public", req.user.id + file.ext)
   );
   const user = await UserModel.findByIdAndUpdate(req.user.id, {
-    photo_url: `${req.protocol}://${process.env.ASSET_URL}/${req.user.id}${file.ext}`,
+    photo_url: `https://${process.env.ASSET_URL}/${req.user.id}${file.ext}`,
   });
   res.status(200).json({
     success: true,
