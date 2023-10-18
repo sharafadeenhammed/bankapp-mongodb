@@ -47,7 +47,7 @@ const UserSchema = mongoose.Schema(
       trim: true,
       require: [true, "please enter your address"],
     },
-    img_url: String,
+    photo_url: String,
     accounted_deleted: { type: Boolean, default: false },
     token_expiration: Date,
     password_reset_token: String,

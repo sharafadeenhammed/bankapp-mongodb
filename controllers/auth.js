@@ -118,6 +118,9 @@ export const login = asyncHandeler(async (req, res, next) => {
       expiresIn: process.env.JWT_TOKEN_EXPIRES || "30d",
     }
   );
+
+  // empty and delete user password from payload
+  user.password = "";
   delete user.password;
   res
     .status(200)
