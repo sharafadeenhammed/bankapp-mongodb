@@ -4,7 +4,7 @@ import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/", protect, update);
-router.post("/photo", protect, photoUpload);
+router.put("/", protect, update);
+router.post("/", protect, photoUpload);
 
 export default router;

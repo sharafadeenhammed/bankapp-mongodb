@@ -18,7 +18,7 @@ export const update = asyncHandeler(async (req, res, next) => {
 
 export const photoUpload = asyncHandeler(async (req, res, next) => {
   if (!req?.files?.photo) {
-    return next(new ErrorResponse("upload a photo with name 'photo'", 400));
+    return next(new ErrorResponse("upload a file with name 'photo'", 400));
   }
   const file = path.parse(req?.files?.photo?.name);
   const imageExtension = [".jpg", ".png"];
@@ -53,9 +53,10 @@ export const photoUpload = asyncHandeler(async (req, res, next) => {
   const user = await UserModel.findByIdAndUpdate(req.user.id, {
     photo_url: `https://${process.env.ASSET_URL}/${req.user.id}${file.ext}`,
   });
+  console.log(user);
   res.status(200).json({
     success: true,
     message: "photo uploaded successful",
-    data: {},
+    data: user,
   });
 });
