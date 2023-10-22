@@ -9,7 +9,7 @@ const publicFolder = asyncHandeler(async (req, res, next) => {
 
   fs.readdir(path.join(__dirname, "..", "public"), (err, files) => {
     if (err) console.log(err);
-    if (files.length > 0) {
+    if (files?.length > 0) {
       for (const file of files) {
         fs.unlink(path.join(__dirname, "..", "public", file), (err) => {
           if (err) console.log(err);
