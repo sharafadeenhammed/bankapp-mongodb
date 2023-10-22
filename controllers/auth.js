@@ -99,8 +99,7 @@ export const login = asyncHandeler(async (req, res, next) => {
       expiresIn: process.env.JWT_TOKEN_EXPIRES || "30d",
     }
   );
-
-  const data = User.findById(user.id);
+  const data = await User.findById(user._id);
   res
     .status(200)
     .cookie("token", `Bearer ${token}`, {
