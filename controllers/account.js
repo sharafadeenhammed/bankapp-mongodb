@@ -7,7 +7,7 @@ import ErrorResponse from "../utils/errorResponse.js";
 //@access PRIVATE
 export const getAccountByAccountNumber = asyncHandeler(
   async (req, res, next) => {
-    const account_number = parseInt(req.params.number, 10);
+    const account_number = req.params.number;
     const account = await Account.findOne({
       account_number,
     });
@@ -106,7 +106,7 @@ export const fundAccount = asyncHandeler(async (req, res, next) => {
 //@desc  get account related to user
 //@access PRIVATE
 export const getAccounts = asyncHandeler(async (req, res, next) => {
-  const accounts = await Account.find({ user_id: req.user.id });
+  const accounts = await Account.findOne({ user_id: req.user.id });
   // check if account found;
   if (!accounts) {
     return next(new ErrorResponse(`no account associated to you found`, 404));

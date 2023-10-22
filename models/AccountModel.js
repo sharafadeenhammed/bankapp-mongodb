@@ -8,7 +8,7 @@ const AccountSchema = mongoose.Schema(
     user_id: { type: mongoose.Schema.ObjectId, required: true },
     balance: Number,
     account_number: {
-      type: Number,
+      type: String,
       unique: true,
       required: true,
     },
