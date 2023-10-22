@@ -22,24 +22,6 @@ export const createUser = asyncHandeler(async (req, res, next) => {
     account_type,
     balance,
   } = user;
-  console.log(user);
-  // if (
-  //   !first_name ||
-  //   !last_name ||
-  //   !password ||
-  //   !email ||
-  //   !address ||
-  //   !age ||
-  //   !phone
-  // ) {
-  //   return next(
-  //     new ErrorResponse(
-  //       "please include a first_name, last_name, password, email, address, age, and phone_number fields",
-  //       400
-  //     )
-  //   );
-  // }
-  // hashing password...
   user = await User.create(user);
   if (!user) {
     new ErrorResponse(
@@ -71,8 +53,7 @@ export const createUser = asyncHandeler(async (req, res, next) => {
       expiresIn: process.env.JWT_TOKEN_EXPIRES || "30d",
     }
   );
-  delete user.password;
-  user.id = user._id;
+  const data = await User.findById(user._id);
   res
     .status(201)
     .cookie("token", `Bearer ${token}`, {
@@ -83,7 +64,7 @@ export const createUser = asyncHandeler(async (req, res, next) => {
     })
     .json({
       success: true,
-      data: user,
+      data,
       token,
     });
 });
@@ -119,9 +100,7 @@ export const login = asyncHandeler(async (req, res, next) => {
     }
   );
 
-  // empty and delete user password from payload
-  user.password = "";
-  delete user.password;
+  const data = User.findById(user.id);
   res
     .status(200)
     .cookie("token", `Bearer ${token}`, {
@@ -133,7 +112,7 @@ export const login = asyncHandeler(async (req, res, next) => {
     .json({
       success: true,
       token,
-      data: user,
+      data,
     });
 });
 
