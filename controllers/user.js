@@ -51,10 +51,10 @@ export const photoUpload = asyncHandeler(async (req, res, next) => {
   const user = await UserModel.findByIdAndUpdate(req.user.id, {
     photo_url: `https://${process.env.ASSET_URL}/${req.user.id}${file.ext}`,
   });
-  // const updatedUSer = await UserModel.findById(req.user.id);
+  const updatedUSer = await UserModel.findById(req.user.id);
   res.status(200).json({
     success: true,
     message: "photo uploaded successful",
-    data: user,
+    data: updatedUSer,
   });
 });
