@@ -17,7 +17,7 @@ export const update = asyncHandeler(async (req, res, next) => {
 });
 
 export const photoUpload = asyncHandeler(async (req, res, next) => {
-  if (!req?.files?.photo?.name) {
+  if (!req?.files?.photo) {
     return next(new ErrorResponse("upload a photo with name 'photo'", 400));
   }
   const file = path.parse(req?.files?.photo?.name);
