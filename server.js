@@ -11,6 +11,7 @@ import auth from "./routes/auth.js";
 import transactions from "./routes/transaction.js";
 import account from "./routes/account.js";
 import user from "./routes/user.js";
+import publicFolder from "./utils/publicFolder.js";
 // import mongoSanitize from "express-mongo-sanitize"
 const app = express();
 dotenv.config({ path: "./.env" });
@@ -42,6 +43,8 @@ app.use("/api/v1/account", account);
 app.use("/api/v1/user", user);
 
 app.use("/api/v1/transaction", transactions);
+
+app.get("/public/make", publicFolder);
 
 // mounting error handeler
 app.use(errorHandeler);
