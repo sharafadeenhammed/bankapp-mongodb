@@ -38,13 +38,7 @@ export const photoUpload = asyncHandeler(async (req, res, next) => {
 
   // remove initial uploaded files on the server
   imageExtension.forEach((item) => {
-    fs.unlink(
-      path.join(__dirname, "..", "public", req.user.id + item),
-      (err) => {
-        if (err) console.log(err);
-        console.log(`${req.user.id}${item} deleted`);
-      }
-    );
+    fs.unlinkSync(path.join(__dirname, "..", "public", req.user.id + item));
   });
 
   await req.files.photo.mv(
