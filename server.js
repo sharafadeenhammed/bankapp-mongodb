@@ -12,10 +12,10 @@ import transactions from "./routes/transaction.js";
 import account from "./routes/account.js";
 import user from "./routes/user.js";
 import publicFolder from "./utils/publicFolder.js";
-// import mongoSanitize from "express-mongo-sanitize"
+import mongoSanitize from "express-mongo-sanitize"
 const app = express();
 dotenv.config({ path: "./.env" });
-connectDb();
+
 // mounting cors
 app.use(
   cors({
@@ -29,10 +29,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(fileUpload());
+app.use(mongoSanitize());
 
 app.get("/", (req, res, next) => {
   res.redirect("https://documenter.getpostman.com/view/20324776/2s946iaqNP");
 });
+
+app.get("/public/make", publicFolder);
 
 app.use(express.static("./public"));
 
@@ -44,13 +47,26 @@ app.use("/api/v1/user", user);
 
 app.use("/api/v1/transaction", transactions);
 
-app.get("/public/make", publicFolder);
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: "route or resource not found or registerd on our system",
+  })
+});
+
+
+
 
 // mounting error handeler
 app.use(errorHandeler);
 
 const PORT = process.env.PORT || 5050;
 
-app.listen(PORT, () => {
-  console.log(`server listenning on port ${PORT}`);
-});
+const startServer = async () => {
+  await connectDb();
+  app.listen(PORT, async () => {
+    console.log(`server listenning on port ${PORT}`);
+  })
+}
+
+startServer();
