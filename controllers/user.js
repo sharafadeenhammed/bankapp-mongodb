@@ -26,7 +26,7 @@ export const photoUpload = asyncHandeler(async (req, res, next) => {
     const extNames = imageExtension.join(", ");
     return next(
       new ErrorResponse(
-        `unsuppoerted '${file.ext}' image we support only ${extNames} files`,
+        `unsupported '${file.ext}' image we support only ${extNames} files`,
         400
       )
     );
@@ -49,7 +49,7 @@ export const photoUpload = asyncHandeler(async (req, res, next) => {
     path.join(__dirname, "..", "public", req.user.id + file.ext)
   );
   const user = await UserModel.findByIdAndUpdate(req.user.id, {
-    photo_url: `https://${process.env.ASSET_URL}/${req.user.id}${file.ext}`,
+    photo_url: `${process.env.ASSET_URL}/${req.user.id}${file.ext}`,
   });
   const updatedUSer = await UserModel.findById(req.user.id);
   res.status(200).json({
